@@ -14,7 +14,7 @@
  * Plugin Name:       DMC User Profiles
  * Plugin URI:        http://wordpress.org/plugins
  * Description:       Extends WordPress user profiles and displays as a profile box
- * Version:           0.0.1
+ * Version:           0.0.2
  * Author:            David McDonald
  * Author URI:        http://www.dmcweb.com.au
  * Text Domain:       dmc-user-profiles
