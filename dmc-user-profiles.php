@@ -2,19 +2,19 @@
 /**
  * DMC User Profiles
  *
- * Extends WordPress user profiles and displays as a profile box
+ * Extends WordPress user profiles and displays as a profile box.
  *
  * @package   DMC_User_Profiles
  * @author    David McDonald <info@davidmcdonald.org>
  * @license   GPL-2.0+
- * @link      http://wordpress.org/plugins
+ * @link      https://github.com/davemac/dmc-user-profiles
  * @copyright 2014 David McDonald
  *
  * @wordpress-plugin
  * Plugin Name:       DMC User Profiles
- * Plugin URI:        http://wordpress.org/plugins
- * Description:       Extends WordPress user profiles and displays as a profile box
- * Version:           0.0.2
+ * Plugin URI:        https://github.com/davemac/dmc-user-profiles
+ * Description:       Extends WordPress user profiles and displays as a profile box.
+ * Version:           0.0.3
  * Author:            David McDonald
  * Author URI:        http://www.dmcweb.com.au
  * Text Domain:       dmc-user-profiles
@@ -108,7 +108,6 @@ function dmc_user_profile_box() {
         return $output;
    
  }
- // add_filter( 'the_content', 'dmc_post_user_profile' );
 
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
