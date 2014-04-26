@@ -1,0 +1,12 @@
+wp.config.php
+wp-config.local.php
+srdb.php
+.DS_Store
+Thumbs.db
+images-source/
+*.svn
+._*
+._*.*
+upgrade/
+error_log
+*.bbprojectd

@@ -28,7 +28,7 @@ class DMC_User_Profiles {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.0.1';
+	const VERSION = '0.0.4';
 
 	/**
 	 * Unique identifier for your plugin.

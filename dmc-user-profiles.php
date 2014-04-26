@@ -14,7 +14,7 @@
  * Plugin Name:       DMC User Profiles
  * Plugin URI:        https://github.com/davemac/dmc-user-profiles
  * Description:       Extends WordPress user profiles and displays as a profile box.
- * Version:           0.0.4
+ * Version:           0.0.5
  * Author:            David McDonald
  * Author URI:        http://www.dmcweb.com.au
  * Text Domain:       dmc-user-profiles
@@ -71,7 +71,7 @@ function dmc_user_profile_box() {
     
     $id = get_the_author_meta( 'ID' );
     $output = '';
-    if ( $id == 5 || $id== 7 ) {
+    // if ( $id == 5 || $id== 7 ) {
 
         // Author bio box
         $output = '<div class="author-bio highlight">';
@@ -104,7 +104,7 @@ function dmc_user_profile_box() {
 
         $output .= '</div>';
         $output .= '</div>';
-     }
+    // }
         return $output;
    
  }
