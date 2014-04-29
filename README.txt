@@ -77,6 +77,13 @@ There are no screenshots currently available.
 
 == Changelog ==
 
+= 0.0.6 =
+* Add Advanced Custom Fields
+* Add option on user profile page to hide profile box
+
+= 0.0.5 =
+* Update Boilerplate code
+
 = 0.0.4 =
 * Update README.txt
 
