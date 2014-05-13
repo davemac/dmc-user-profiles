@@ -77,6 +77,9 @@ There are no screenshots currently available.
 
 == Changelog ==
 
+= 0.1.0 =
+* Style tweaks
+
 = 0.0.9 =
 * Link user website to name and custom user image
 * Accessibility, style tweaks
