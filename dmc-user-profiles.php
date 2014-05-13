@@ -14,7 +14,7 @@
  * Plugin Name:       DMC User Profiles
  * Plugin URI:        https://github.com/davemac/dmc-user-profiles
  * Description:       Extends WordPress user profiles and displays as a profile box.
- * Version:           0.0.8
+ * Version:           0.0.9
  * Author:            David McDonald
  * Author URI:        http://www.dmcweb.com.au
  * Text Domain:       dmc-user-profiles
@@ -136,20 +136,20 @@ function dmc_user_profile_box() {
         
         if( get_field('dmc_custom_user_image', 'user_' . $author_id ) ) : 
                         
-           $output .= '<a href="' . get_author_posts_url( $author_id ) . '"><img src="' . get_field('dmc_custom_user_image', 'user_' . $author_id ) . '" alt="' . $author_name . '" title="' . $author_name . '" width="90" class="alignright" /></a>';
+           $output .= '<a href="' . $author_url . '" title="Go to ' . $author_name . 's website"><img src="' . get_field('dmc_custom_user_image', 'user_' . $author_id ) . '" alt="' . $author_name . '" width="90" class="alignright" /></a>';
         else : 
             $avatar = get_avatar( $author_id, '90' );
             $output .= '<div class="author-avatar">' . $avatar . "</div>";
        endif; 
      
         if( $twitter = get_the_author_meta( 'twitter' )) {
-            $output .= '<a href="http://twitter.com/' . $twitter . '" class="right"><span class="icon-twitter small"></span></a>';
+            $output .= '<a href="http://twitter.com/' . $twitter . '" class="right" title="View ' . $author_name . 's tweets"><span class="icon-twitter small"></span></a>';
         } 
         if ( $linkedin = get_the_author_meta( 'linkedin' )) {
-            $output .= '<a href="' . $linkedin . '" class="right"><span class="icon-linkedin small"></span></a>';
+            $output .= '<a href="' . $linkedin . '" class="right"><span class="icon-linkedin small" title="View ' . $author_name . ' on LinkedIn"></span></a>';
         }
         if( $author_url ) {
-            $output .= '<h3><a href="' . $author_url . '">' . $author_name . '</a></h3>';
+            $output .= '<h3><a href="' . $author_url . '" title="Go to ' . $author_name . 's website" >' . $author_name . '</a></h3>';
         } else {
             $output .= '<h3>' . $author_name . '</h3>';
         }
@@ -163,7 +163,7 @@ function dmc_user_profile_box() {
             $output .= '<span> Mobile: ' . $mobile .'</span>';
         }
         if( $author_url ) {
-             $output .= '<span class="right"><a href="' . $author_url . '">' . $author_name .'s website</a></span>';
+             $output .= '<span class="right"><a href="' . $author_url . '">Website</a></span>';
         }
         $output .= '<span class="right"><a href="' . get_author_posts_url( $author_id ) . '">More articles by ' . get_the_author() . '</a></span>';
 

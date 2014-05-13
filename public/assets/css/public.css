@@ -66,6 +66,10 @@
 	margin: 0 0 5px 10px;
 }
 
+.author-bio img.alignright{
+	margin: 0 0 10px 15px;
+}
+
 .author-bio h3{
 	margin-top: 0;
 }
