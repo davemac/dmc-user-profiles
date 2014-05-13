@@ -56,21 +56,24 @@ if(function_exists("register_field_group"))
                 'message' => 'Hide the User Profile for this user',
                 'default_value' => 0,
             ),
+            array (
+                'key' => 'field_53717ba38da0f',
+                'label' => 'Custom User Image',
+                'name' => 'dmc_custom_user_image',
+                'type' => 'image',
+                'instructions' => 'By default, if the user has a Gravatar profile, their Gravatar image will be shown in their user profile. You can override this by uploading a custom user image here.',
+                'save_format' => 'url',
+                'preview_size' => 'medium',
+                'library' => 'all',
+            ),
         ),
         'location' => array (
             array (
                 array (
-                    'param' => 'user_type',
-                    'operator' => '==',
-                    'value' => 'administrator',
-                    'order_no' => 0,
-                    'group_no' => 0,
-                ),
-                array (
                     'param' => 'ef_user',
                     'operator' => '==',
                     'value' => 'all',
-                    'order_no' => 1,
+                    'order_no' => 0,
                     'group_no' => 0,
                 ),
             ),
@@ -117,10 +120,12 @@ add_filter( 'user_contactmethods', 'dmc_new_contactmethods', 10, 1 );
 function dmc_user_profile_box() {
 
     $output = '';
-    $id = get_the_author_meta( 'ID' );
+    $author_id = get_the_author_meta( 'ID' );
+    $author_url = get_the_author_meta( 'user_url' );
+    $author_name = get_the_author();
 
-    if( !get_field('dmc_hide_user_profile', 'user_' . $id) ) { 
-        the_field('dmc_hide_user_profile', 'user_' . $id);
+    if( !get_field('dmc_hide_user_profile', 'user_' . $author_id) ) { 
+        the_field('dmc_hide_user_profile', 'user_' . $author_id);
     
         // if( !is_singular( 'post' ))
         //     return $content;
@@ -129,8 +134,13 @@ function dmc_user_profile_box() {
         $output = '<div class="author-bio highlight">';
         $output .= '<div class="the-author-info">';
         
-        $avatar = get_avatar( $id, '90' );
+        if( get_field('dmc_custom_user_image', 'user_' . $author_id ) ) : 
+                        
+           $output .= '<a href="' . get_author_posts_url( $author_id ) . '"><img src="' . get_field('dmc_custom_user_image', 'user_' . $author_id ) . '" alt="' . $author_name . '" title="' . $author_name . '" width="90" class="alignright" /></a>';
+        else : 
+            $avatar = get_avatar( $author_id, '90' );
             $output .= '<div class="author-avatar">' . $avatar . "</div>";
+       endif; 
      
         if( $twitter = get_the_author_meta( 'twitter' )) {
             $output .= '<a href="http://twitter.com/' . $twitter . '" class="right"><span class="icon-twitter small"></span></a>';
@@ -138,10 +148,10 @@ function dmc_user_profile_box() {
         if ( $linkedin = get_the_author_meta( 'linkedin' )) {
             $output .= '<a href="' . $linkedin . '" class="right"><span class="icon-linkedin small"></span></a>';
         }
-        if( $url = get_the_author_meta( 'user_url' )) {
-            $output .= '<h3><a href="' . $url . '">' . get_the_author() . '</a></h3>';
+        if( $author_url ) {
+            $output .= '<h3><a href="' . $author_url . '">' . $author_name . '</a></h3>';
         } else {
-            $output .= '<h3>' . get_the_author() . '</h3>';
+            $output .= '<h3>' . $author_name . '</h3>';
         }
         
         $output .= '<p>' . get_the_author_meta( 'description' ) . '</p>';
@@ -152,7 +162,11 @@ function dmc_user_profile_box() {
         if ( $mobile = get_the_author_meta( 'mobile' )) {
             $output .= '<span> Mobile: ' . $mobile .'</span>';
         }
-        $output .= '<span class="right"><a href="' . get_author_posts_url( $id ) . '">More articles by ' . get_the_author() . '</a></span>';
+        if( $author_url ) {
+             $output .= '<span class="right"><a href="' . $author_url . '">' . $author_name .'s website</a></span>';
+        }
+        $output .= '<span class="right"><a href="' . get_author_posts_url( $author_id ) . '">More articles by ' . get_the_author() . '</a></span>';
+
         $output .= '</div>';
 
         $output .= '</div>';

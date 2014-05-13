@@ -77,6 +77,9 @@ There are no screenshots currently available.
 
 == Changelog ==
 
+= 0.0.8 =
+* Setup unit tests, add custom user image option
+
 = 0.0.7 =
 * Update Advanced Custom Fields to 4.3.8
 
