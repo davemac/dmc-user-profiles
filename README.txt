@@ -77,6 +77,9 @@ There are no screenshots currently available.
 
 == Changelog ==
 
+= 0.0.7 =
+* Update Advanced Custom Fields to 4.3.8
+
 = 0.0.6 =
 * Add Advanced Custom Fields
 * Add option on user profile page to hide profile box
