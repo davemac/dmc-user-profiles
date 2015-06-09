@@ -14,7 +14,7 @@
  * Plugin Name:       DMC User Profiles
  * Plugin URI:        https://github.com/davemac/dmc-user-profiles
  * Description:       Extends WordPress user profiles and displays as a profile box.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Author:            David McDonald
  * Author URI:        http://www.dmcweb.com.au
  * Text Domain:       dmc-user-profiles
@@ -26,7 +26,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
 }
 
 /*----------------------------------------------------------------------------*
@@ -180,6 +180,67 @@ function dmc_user_profile_box() {
     }
  }
 
+
+ //  Display bios of individual users
+function dmc_show_user_profile_box( $spec_user ) {
+
+    $dmcuser = get_user_by( 'login', $spec_user );
+
+    $output = '';
+    $author_id = $dmcuser->ID;
+    $author_url = $dmcuser->user_url;
+    $author_name = $dmcuser->display_name;
+    $author_email = $dmcuser->user_email;
+
+    // Author bio box
+    $output = '<div class="author-bio highlight">';
+    $output .= '<div class="the-author-info">';
+    
+    if( get_field('dmc_custom_user_image', 'user_' . $author_id ) ) : 
+                    
+       $output .= '<a href="' . $author_url . '" title="Go to ' . $author_name . 's website"><img src="' . get_field('dmc_custom_user_image', 'user_' . $author_id ) . '" alt="' . $author_name . '" width="90" class="alignright" /></a>';
+    else : 
+        $avatar = get_avatar( $author_id, '90' );
+        $output .= '<div class="author-avatar">' . $avatar . "</div>";
+   endif; 
+ 
+    if( $twitter = get_the_author_meta( 'twitter', $author_id )) {
+        $output .= '<a href="http://twitter.com/' . $twitter . '" class="right" title="View ' . $author_name . 's tweets"><span class="icon-twitter small"></span></a>';
+    } 
+    if ( $linkedin = get_the_author_meta( 'linkedin', $author_id )) {
+        $output .= '<a href="' . $linkedin . '" class="right"><span class="icon-linkedin small" title="View ' . $author_name . ' on LinkedIn"></span></a>';
+    }
+    if( $author_url ) {
+        $output .= '<h3><a href="' . $author_url . '" title="Go to ' . $author_name . 's website" >' . $author_name . '</a></h3>';
+    } else {
+        $output .= '<h3>' . $author_name . '</h3>';
+    }
+    
+    $output .= '<p>' . get_the_author_meta( 'description', $author_id ) . '</p>';
+    $output .= '<div class="post-meta">';
+    if ( $phone = get_the_author_meta( 'phone', $author_id )) {
+        $output .= '<span>P: ' . $phone .'</span> &nbsp;';
+    }
+    if ( $mobile = get_the_author_meta( 'mobile', $author_id )) {
+        $output .= '<span> M: ' . $mobile .'</span>';
+    }
+    if( $author_email ) {
+        $output .= '<span> E: <a href="mailto:' . antispambot( $author_email ) . '">' . antispambot( $author_email ) . '</a></span>';
+    }
+    if( $author_url ) {
+         $output .= '<span class="right"><a href="' . $author_url . '">Website</a></span>';
+    }
+    $output .= '<span class="right"><a href="' . get_author_posts_url( $author_id ) . '">More articles by ' . $author_name . '</a></span>';
+
+    $output .= '</div>';
+
+    $output .= '</div>';
+    $output .= '</div>';
+
+    return $output;
+
+ }
+
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
  *----------------------------------------------------------------------------*/
@@ -198,7 +259,7 @@ function dmc_user_profile_box() {
  */
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-dmc-user-profiles-admin.php' );
-	add_action( 'plugins_loaded', array( 'DMC_User_Profiles_Admin', 'get_instance' ) );
+    require_once( plugin_dir_path( __FILE__ ) . 'admin/class-dmc-user-profiles-admin.php' );
+    add_action( 'plugins_loaded', array( 'DMC_User_Profiles_Admin', 'get_instance' ) );
 
 }

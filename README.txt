@@ -77,6 +77,9 @@ There are no screenshots currently available.
 
 == Changelog ==
 
+= 0.3.0 =
+* Add new function dmc_show_user_profile_box to show profiles of specific users on a page
+
 = 0.2.0 =
 * Add option to display user emails
 
