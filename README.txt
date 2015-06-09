@@ -77,6 +77,9 @@ There are no screenshots currently available.
 
 == Changelog ==
 
+= 0.2.0 =
+* Add option to display user emails
+
 = 0.1.0 =
 * Style tweaks
 

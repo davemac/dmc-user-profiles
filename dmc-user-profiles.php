@@ -14,7 +14,7 @@
  * Plugin Name:       DMC User Profiles
  * Plugin URI:        https://github.com/davemac/dmc-user-profiles
  * Description:       Extends WordPress user profiles and displays as a profile box.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Author:            David McDonald
  * Author URI:        http://www.dmcweb.com.au
  * Text Domain:       dmc-user-profiles
@@ -123,6 +123,7 @@ function dmc_user_profile_box() {
     $author_id = get_the_author_meta( 'ID' );
     $author_url = get_the_author_meta( 'user_url' );
     $author_name = get_the_author();
+    $author_email = get_the_author_meta( 'user_email' );
 
     if( !get_field('dmc_hide_user_profile', 'user_' . $author_id) ) { 
         the_field('dmc_hide_user_profile', 'user_' . $author_id);
@@ -157,10 +158,13 @@ function dmc_user_profile_box() {
         $output .= '<p>' . get_the_author_meta( 'description' ) . '</p>';
         $output .= '<div class="post-meta">';
         if ( $phone = get_the_author_meta( 'phone' )) {
-            $output .= '<span>Phone: ' . $phone .'</span> &nbsp;';
+            $output .= '<span>P: ' . $phone .'</span> &nbsp;';
         }
         if ( $mobile = get_the_author_meta( 'mobile' )) {
-            $output .= '<span> Mobile: ' . $mobile .'</span>';
+            $output .= '<span> M: ' . $mobile .'</span>';
+        }
+        if( $author_email ) {
+            $output .= '<span> E: <a href="mailto:' . antispambot( $author_email ) . '">' . antispambot( $author_email ) . '</a></span>';
         }
         if( $author_url ) {
              $output .= '<span class="right"><a href="' . $author_url . '">Website</a></span>';
